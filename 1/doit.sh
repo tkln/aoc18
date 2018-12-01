@@ -1,1 +1,1 @@
-rustc main.rs && ./main < input.txt
+rustc -O main.rs && ./main < input.txt
