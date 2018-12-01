@@ -1,8 +1,8 @@
 use std::io;
 
-fn main()
-{
+fn main() {
     let mut deltas: Vec<i32> = Vec::new();
+    let mut freqs: Vec<i32> = Vec::new();
 
     loop {
         let mut line = String::new();
@@ -11,7 +11,7 @@ fn main()
                 if n == 0 {
                     break;
                 }
-                line.pop();
+                line.pop(); /* Strip the newline */
                 match line.parse::<i32>() {
                     Ok(v) => deltas.push(v),
                     Err(err) => println!("failed to parse: {}, {}", err, line),
@@ -24,4 +24,15 @@ fn main()
         }
     }
     println!("sum: {}", deltas.iter().fold(0, |sum, x| sum + x ));
+
+    let mut sum: i32 = 0;
+
+    for d in deltas.iter().cycle() {
+        sum += *d;
+        if (&freqs).contains(&sum) {
+            println!("twice {}", sum);
+            break;
+        }
+        freqs.push(sum);
+    }
 }
