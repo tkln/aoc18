@@ -41,6 +41,12 @@ fn count_letters(id: &Vec<char>) -> (i32, i32) {
     (doubles, triples)
 }
 
+fn distance(id_a: &Vec<char>, id_b: &Vec<char>) -> i32 {
+    -id_a.iter().zip(id_b.iter()).fold(0, |acc: i32, pair|
+        acc + (*pair.0 == *pair.1) as i32
+    ) + id_a.len() as i32
+}
+
 fn main() {
     let ids: Vec<Vec<char>> = read_input();
 
@@ -52,4 +58,20 @@ fn main() {
 
     println!("n: {}", ids.len());
     println!("checksum: {}", pair.0 * pair.1);
+
+    for id_a_pair in ids.iter().enumerate() {
+        let id_a = id_a_pair.1;
+        for id_b in &ids[id_a_pair.0 + 1..] {
+            let d = distance(id_a, id_b);
+            if d == 1 {
+                for cc in id_a.iter().zip(id_b.iter()) {
+                    if cc.0 != cc.1 {
+                        continue;
+                    }
+                    print!("{}", cc.0)
+                }
+                println!();
+            }
+        }
+    }
 }
