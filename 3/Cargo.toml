@@ -1,0 +1,11 @@
+[package]
+name = "day3"
+version = "0.1.0"
+authors = ["Aapo Vienamo <aapo.vienamo@iki.fi>"]
+
+[dependencies]
+regex = "1"
+
+[[bin]]
+name = "day3"
+path = "main.rs"
